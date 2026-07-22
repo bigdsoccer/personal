@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scouting Report — Drew Epperley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pitch:#0F1B14;
+  --pitch-2:#152417;
+  --chalk:#F2F0E6;
+  --chalk-dim:#9AA396;
+  --flare:#E8552C;
+  --signal:#4FB477;
+  --caution:#E0A526;
+  --line:rgba(242,240,230,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--pitch);
+  color:var(--chalk);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 100px}
+
+/* ---------- HERO ---------- */
+header{
+  border-bottom:1px solid var(--line);
+  padding:56px 0 40px;
+  position:relative;
+  overflow:hidden;
+}
+header::after{
+  content:"";position:absolute;right:-80px;top:-40px;
+  width:340px;height:340px;border-radius:50%;
+  border:1px solid var(--line);
+}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--flare);margin-bottom:18px;
+}
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,9vw,108px);
+  line-height:.88;letter-spacing:.01em;
+}
+h1 .sub{display:block;color:var(--chalk-dim);}
+.deck{
+  margin-top:22px;max-width:640px;color:var(--chalk-dim);font-size:16.5px;
+}
+.deck b{color:var(--chalk);font-weight:600}
+
+/* ---------- SCOREBOARD ---------- */
+.board{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);
+  margin:44px 0 0;
+}
+.cell{background:var(--pitch);padding:20px 22px}
+.cell .k{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--chalk-dim);
+}
+.cell .v{
+  font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1.05;margin-top:6px;
+}
+.cell .n{font-size:12.5px;color:var(--chalk-dim);margin-top:2px}
+.up{color:var(--signal)} .warn{color:var(--caution)} .hot{color:var(--flare)}
+
+/* ---------- SECTIONS ---------- */
+section{margin-top:72px}
+h2{
+  font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.02em;
+  display:flex;align-items:baseline;gap:14px;
+}
+h2::before{
+  content:attr(data-n);
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+  color:var(--flare);font-weight:600;
+}
+.lede{color:var(--chalk-dim);margin:10px 0 26px;max-width:720px;font-size:15.5px}
+
+/* ---------- GAP BARS ---------- */
+.gap{
+  display:grid;grid-template-columns:190px 1fr 76px;gap:16px;align-items:center;
+  padding:13px 0;border-bottom:1px solid var(--line);
+}
+.gap .label{font-weight:600;font-size:14.5px}
+.gap .label small{display:block;color:var(--chalk-dim);font-weight:400;font-size:12.5px}
+.track{height:8px;background:rgba(242,240,230,.09);position:relative}
+.fill{height:100%;position:absolute;left:0;top:0}
+.gap .pct{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right;color:var(--chalk-dim);
+}
+
+/* ---------- TABLE ---------- */
+.tblwrap{overflow-x:auto;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:660px}
+th{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--chalk-dim);text-align:left;
+  padding:13px 16px;border-bottom:1px solid var(--line);font-weight:500;
+  background:var(--pitch-2);
+}
+td{padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.co{font-weight:600}
+td.co small{display:block;color:var(--chalk-dim);font-weight:400;font-size:12.5px;margin-top:2px}
+.tag{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;
+  padding:3px 8px;border:1px solid currentColor;white-space:nowrap;
+}
+.t-rem{color:var(--signal)} .t-dfw{color:var(--caution)} .t-both{color:var(--chalk-dim)}
+.fit{font-family:'Bebas Neue',sans-serif;font-size:26px;line-height:1}
+
+/* ---------- BOOLEAN BLOCKS ---------- */
+.bool{
+  border:1px solid var(--line);padding:0;margin-bottom:12px;
+}
+.bool .head{
+  padding:11px 16px;border-bottom:1px solid var(--line);background:var(--pitch-2);
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--chalk-dim);
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+}
+.bool code{
+  display:block;padding:16px;font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;line-height:1.75;color:var(--chalk);word-break:break-word;
+}
+.copy{
+  background:none;border:1px solid var(--line);color:var(--chalk-dim);
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;
+  padding:4px 10px;cursor:pointer;text-transform:uppercase;
+}
+.copy:hover{color:var(--flare);border-color:var(--flare)}
+.copy:focus-visible{outline:2px solid var(--flare);outline-offset:2px}
+
+/* ---------- BOARDS ---------- */
+.boards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.bcard{border:1px solid var(--line);padding:18px 20px}
+.bcard h3{font-size:15.5px;margin-bottom:4px}
+.bcard .why{color:var(--chalk-dim);font-size:13.5px}
+.bcard .rank{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;
+  color:var(--flare);text-transform:uppercase;margin-bottom:8px;
+}
+
+/* ---------- CHECKLIST ---------- */
+.task{
+  display:flex;gap:14px;align-items:flex-start;padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+.task input{
+  appearance:none;width:17px;height:17px;border:1px solid var(--chalk-dim);
+  flex:0 0 auto;margin-top:3px;cursor:pointer;position:relative;background:none;
+}
+.task input:checked{background:var(--signal);border-color:var(--signal)}
+.task input:checked::after{
+  content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;
+  border:solid var(--pitch);border-width:0 2px 2px 0;transform:rotate(45deg);
+}
+.task input:focus-visible{outline:2px solid var(--flare);outline-offset:2px}
+.task .body{flex:1}
+.task .t{font-weight:600;font-size:14.5px}
+.task .d{color:var(--chalk-dim);font-size:13px;margin-top:2px}
+.task input:checked ~ .body .t{text-decoration:line-through;color:var(--chalk-dim)}
+.cost{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--caution);
+  white-space:nowrap;padding-top:2px;
+}
+
+/* ---------- CALLOUT ---------- */
+.callout{
+  border-left:2px solid var(--flare);padding:16px 20px;margin-top:26px;
+  background:var(--pitch-2);font-size:14.5px;
+}
+.callout b{color:var(--flare)}
+
+footer{
+  margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
+  color:var(--chalk-dim);font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+}
+@media (max-width:640px){
+  .gap{grid-template-columns:1fr;gap:6px}
+  .gap .pct{text-align:left}
+  .cell .v{font-size:32px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Scouting Report · Rev. July 2026</div>
+  <h1>Marketing Ops<span class="sub">Target Board</span></h1>
+  <p class="deck">You are not a lifecycle marketer competing against Braze operators. You are a <b>Salesforce/Pardot automation lead</b> with five years at 160+ property scale. Search the segment where that reads as expertise, not as the wrong stack.</p>
+
+  <div class="board">
+    <div class="cell"><div class="k">Current</div><div class="v">$96K</div><div class="n">+10% bonus · flat title 5 yrs</div></div>
+    <div class="cell"><div class="k">Floor</div><div class="v up">$125K</div><div class="n">walk away below this</div></div>
+    <div class="cell"><div class="k">Target band</div><div class="v up">$125–150K</div><div class="n">remote pays over DFW local</div></div>
+    <div class="cell"><div class="k">Apply window</div><div class="v hot">12 days</div><div class="n">median post-to-close · 6 at fastest</div></div>
+  </div>
+</header>
+
+<section>
+  <h2 data-n="01">The honest gap chart</h2>
+  <p class="lede">Ranked by how much each one is actually costing you in the target band. Two of these are weekend problems you have been treating as career problems.</p>
+
+  <div class="gap">
+    <div class="label">Pardot depth<small>5 yrs · 160+ clubs · team lead</small></div>
+    <div class="track"><div class="fill" style="width:95%;background:var(--signal)"></div></div>
+    <div class="pct">Asset</div>
+  </div>
+  <div class="gap">
+    <div class="label">Team leadership<small>clears the "senior" bar</small></div>
+    <div class="track"><div class="fill" style="width:85%;background:var(--signal)"></div></div>
+    <div class="pct">Asset</div>
+  </div>
+  <div class="gap">
+    <div class="label">SQL<small>the actual toll booth</small></div>
+    <div class="track"><div class="fill" style="width:15%;background:var(--flare)"></div></div>
+    <div class="pct">Blocker</div>
+  </div>
+  <div class="gap">
+    <div class="label">Pardot certification<small>$200 · ATS keyword gate</small></div>
+    <div class="track"><div class="fill" style="width:0%;background:var(--flare)"></div></div>
+    <div class="pct">Blocker</div>
+  </div>
+  <div class="gap">
+    <div class="label">Tableau / BI<small>nice-to-have, listed often</small></div>
+    <div class="track"><div class="fill" style="width:20%;background:var(--caution)"></div></div>
+    <div class="pct">Soft</div>
+  </div>
+  <div class="gap">
+    <div class="label">HubSpot<small>migration roles are hot right now</small></div>
+    <div class="track"><div class="fill" style="width:30%;background:var(--caution)"></div></div>
+    <div class="pct">Soft</div>
+  </div>
+  <div class="gap">
+    <div class="label">Braze / Klaviyo<small>B2C stack — wrong segment</small></div>
+    <div class="track"><div class="fill" style="width:5%;background:rgba(242,240,230,.25)"></div></div>
+    <div class="pct">Ignore</div>
+  </div>
+
+  <div class="callout"><b>Read this twice.</b> Certification and SQL are together about $200 and six weekends. They are the difference between an ATS filtering you out silently and a recruiter calling. Everything else on this page is downstream of those two lines.</div>
+</section>
+
+<section>
+  <h2 data-n="02">Where to hunt</h2>
+  <p class="lede">Industries running Salesforce/Pardot with real projected growth, screened against your no-fly list: no agencies, no MLM, no crypto, nothing pointed at a five-year downsizing cliff. DFW entries respect the northeast quadrant — inside 635/PGBT, the 75 corridor, DART-reachable downtown. Nothing west of Las Colinas, nothing south of downtown.</p>
+
+  <div class="tblwrap">
+  <table>
+    <thead><tr><th>Sector</th><th>Why it fits you</th><th>Where</th><th>Fit</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="co">B2B SaaS<small>mid-market, 200–2000 emp</small></td>
+        <td>Pardot is the default stack. Your multi-instance governance experience is rare and priced accordingly.</td>
+        <td><span class="tag t-rem">Remote</span></td>
+        <td class="fit up">9</td>
+      </tr>
+      <tr>
+        <td class="co">Healthcare tech<small>payer, provider ops, RCM</small></td>
+        <td>Heavily Salesforce. Compliance-driven data hygiene is your daily job already. Durable sector, not a fad.</td>
+        <td><span class="tag t-both">Both</span></td>
+        <td class="fit up">9</td>
+      </tr>
+      <tr>
+        <td class="co">Fintech / insurtech<small>real DFW density</small></td>
+        <td>Plano and Legacy corridor are thick with it. Regulated comms plus Salesforce equals your exact skill set.</td>
+        <td><span class="tag t-dfw">DFW + Remote</span></td>
+        <td class="fit up">8</td>
+      </tr>
+      <tr>
+        <td class="co">Higher ed / edtech<small>enrollment marketing</small></td>
+        <td>Pardot is near-universal in enrollment. Your HPUMC background reads as a genuine plus here, not a detour.</td>
+        <td><span class="tag t-rem">Remote</span></td>
+        <td class="fit up">8</td>
+      </tr>
+      <tr>
+        <td class="co">Hospitality / membership tech<small>the adjacent play</small></td>
+        <td>Sells software to the industry you already know cold. You are the customer they wish they could hire.</td>
+        <td><span class="tag t-both">Both</span></td>
+        <td class="fit up">8</td>
+      </tr>
+      <tr>
+        <td class="co">Prof. services & assoc.<small>legal, accounting, membership orgs</small></td>
+        <td>Unsexy, stable, Pardot-native, chronically understaffed in ops. Low competition for the posting.</td>
+        <td><span class="tag t-both">Both</span></td>
+        <td class="fit">7</td>
+      </tr>
+      <tr>
+        <td class="co">Consumer e-comm / DTC<small>the trap you were in</small></td>
+        <td>Wants Braze, Klaviyo, Attentive. You lose on stack before anyone reads your outcomes. Skip it.</td>
+        <td><span class="tag t-both">—</span></td>
+        <td class="fit hot">3</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2 data-n="03">Search strings</h2>
+  <p class="lede">Paste these into the board's keyword field, not a browser. Save each as an alert. The point is that the scouting happens without you remembering to scout.</p>
+
+  <div class="bool">
+    <div class="head"><span>Primary — stack-first</span><button class="copy" data-c='("marketing automation" OR "marketing operations") AND (Pardot OR "Account Engagement" OR Marketo OR HubSpot) AND (senior OR lead OR manager) NOT agency NOT contract'>Copy</button></div>
+    <code>("marketing automation" OR "marketing operations") AND (Pardot OR "Account Engagement" OR Marketo OR HubSpot) AND (senior OR lead OR manager) NOT agency NOT contract</code>
+  </div>
+
+  <div class="bool">
+    <div class="head"><span>Title sweep</span><button class="copy" data-c='"Senior Marketing Operations Manager" OR "Senior Marketing Automation Manager" OR "Marketing Technology Manager" OR "Senior Demand Generation Manager" OR "MarTech Manager"'>Copy</button></div>
+    <code>"Senior Marketing Operations Manager" OR "Senior Marketing Automation Manager" OR "Marketing Technology Manager" OR "Senior Demand Generation Manager" OR "MarTech Manager"</code>
+  </div>
+
+  <div class="bool">
+    <div class="head"><span>Migration play — premium right now</span><button class="copy" data-c='(Pardot OR "Account Engagement" OR "Marketing Cloud") AND (migration OR migrate OR sunset OR consolidation OR "platform transition")'>Copy</button></div>
+    <code>(Pardot OR "Account Engagement" OR "Marketing Cloud") AND (migration OR migrate OR sunset OR consolidation OR "platform transition")</code>
+  </div>
+
+  <div class="bool">
+    <div class="head"><span>DFW geo-bounded</span><button class="copy" data-c='(Pardot OR "marketing automation" OR "marketing operations") AND (Plano OR Frisco OR Richardson OR Addison OR "Legacy West" OR "Downtown Dallas" OR Uptown) AND (hybrid OR remote)'>Copy</button></div>
+    <code>(Pardot OR "marketing automation" OR "marketing operations") AND (Plano OR Frisco OR Richardson OR Addison OR "Legacy West" OR "Downtown Dallas" OR Uptown) AND (hybrid OR remote)</code>
+  </div>
+
+  <div class="bool">
+    <div class="head"><span>Salary-gated — skips the lowballs</span><button class="copy" data-c='("marketing operations" OR "marketing automation") AND (Pardot OR Salesforce) AND ("$125,000" OR "$130,000" OR "$135,000" OR "$140,000" OR "$150,000")'>Copy</button></div>
+    <code>("marketing operations" OR "marketing automation") AND (Pardot OR Salesforce) AND ("$125,000" OR "$130,000" OR "$135,000" OR "$140,000" OR "$150,000")</code>
+  </div>
+</section>
+
+<section>
+  <h2 data-n="04">Boards worth your time</h2>
+  <p class="lede">Ranked by signal-to-noise for this specific search. The generic aggregators are at the bottom for a reason — they gave us handbag brands and a van startup.</p>
+  <div class="boards">
+    <div class="bcard"><div class="rank">Start here</div><h3>Built In</h3><p class="why">Lists the actual tech stack on every posting. Filter on Pardot directly. Has a Dallas-Fort Worth vertical plus remote. Highest signal of anything tested.</p></div>
+    <div class="bcard"><div class="rank">Start here</div><h3>LinkedIn saved search</h3><p class="why">Best alert engine. Run the title sweep, save it, set daily. Turn on "open to work" recruiter-only — Invited will not see it.</p></div>
+    <div class="bcard"><div class="rank">High value</div><h3>Salesforce Talent Alliance</h3><p class="why">Ecosystem-specific. Everyone posting there already runs the stack you know. Small volume, very high hit rate.</p></div>
+    <div class="bcard"><div class="rank">Worth it</div><h3>Company career pages</h3><p class="why">Once the target list is named, check directly. Postings appear here before they hit aggregators — inside that 12-day window.</p></div>
+    <div class="bcard"><div class="rank">Background</div><h3>Glassdoor / Indeed</h3><p class="why">Volume play. Only usable with the salary-gated string above. Expect to discard most of what it returns.</p></div>
+    <div class="bcard"><div class="rank">Background</div><h3>Wellfound / Otta</h3><p class="why">Startup-heavy. Screen hard against your downsizing-cliff rule — most will not survive it.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 data-n="05">Next 60 days</h2>
+  <p class="lede">In order. The first three are the whole ballgame; the rest is maintenance. Checkboxes are local to this page — check them for satisfaction, not for permanence.</p>
+
+  <div class="task"><input type="checkbox" id="t1"><div class="body"><div class="t">Book the Pardot Specialist exam</div><div class="d">Salesforce Certified Marketing Cloud Account Engagement Specialist. Trailhead prep is free. You already know the system — this is a scheduling problem, not a studying problem.</div></div><div class="cost">$200 · 1 wknd</div></div>
+
+  <div class="task"><input type="checkbox" id="t2"><div class="body"><div class="t">Start SQL — one hour a night</div><div class="d">Free Postgres instance, any dataset. Target is SELECT, JOIN, GROUP BY, subqueries. That is what "intermediate" means in these postings. Six weeks, done.</div></div><div class="cost">Free · 6 wks</div></div>
+
+  <div class="task"><input type="checkbox" id="t3"><div class="body"><div class="t">Strip "lifecycle marketing" from resume + drew.epp6.com</div><div class="d">It came from an Invited job description, not from you. It files you into the segment where you score a 3. Replace with marketing automation and marketing operations throughout.</div></div><div class="cost">1 hr</div></div>
+
+  <div class="task"><input type="checkbox" id="t4"><div class="body"><div class="t">Rewrite the top of the resume around scale and governance</div><div class="d">Not "learns systems quickly." Lead with administering marketing automation across 160+ properties: data architecture, permissioning, multi-instance governance. Quantify the team headcount.</div></div><div class="cost">2 hrs</div></div>
+
+  <div class="task"><input type="checkbox" id="t5"><div class="body"><div class="t">Set the five alerts</div><div class="d">Built In and LinkedIn first. Daily digest, not weekly — the window is twelve days and the good ones close in six.</div></div><div class="cost">30 min</div></div>
+
+  <div class="task"><input type="checkbox" id="t6"><div class="body"><div class="t">HubSpot Academy certification</div><div class="d">Free, one weekend. Doubles the number of postings you clear on stack keywords and opens the migration roles, which pay a premium right now.</div></div><div class="cost">Free · 1 wknd</div></div>
+
+  <div class="task"><input type="checkbox" id="t7"><div class="body"><div class="t">Build one Tableau Public dashboard</div><div class="d">Free tier. Use your own campaign numbers. One public link converts "familiar with Tableau" into something a hiring manager can click.</div></div><div class="cost">Free · 3 hrs</div></div>
+
+  <div class="callout"><b>The leverage you have:</b> no urgency. You are not fleeing a burning building — you can decline a bad offer, and that is worth more than any resume rewrite on this page. It also means the certs get done <i>before</i> the search gets serious. Do not waste a calm runway.</div>
+</section>
+
+<footer>Scouting report · built July 2026 · revise when the target list gets named</footer>
+
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.dataset.c, done=function(){
+      var o=b.textContent; b.textContent='Copied';
+      setTimeout(function(){b.textContent=o;},1400);
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(done).catch(function(){fallback(t,done)});
+    } else { fallback(t,done); }
+  });
+});
+function fallback(t,cb){
+  var a=document.createElement('textarea');
+  a.value=t; a.style.position='fixed'; a.style.opacity='0';
+  document.body.appendChild(a); a.select();
+  try{document.execCommand('copy');cb();}catch(e){}
+  document.body.removeChild(a);
+}
+</script>
+</body>
+</html>
